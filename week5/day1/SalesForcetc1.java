@@ -18,8 +18,8 @@ public class SalesForcetc1 extends SalesForceLoginAutomation {
 		
 		// Enter Name as 'Salesforce Automation by *Your Name*'
 		String name="Salesforce Automation";
-		driver.findElement(By.xpath("(//input[@class='slds-input'])[2]")).sendKeys(name);
-		
+		//driver.findElement(By.xpath("(//input[@class='slds-input'])[2]")).sendKeys(name);
+		driver.findElement(By.xpath("//input[@name='Name']")).sendKeys(name);
 		//Click save 
 		driver.findElement(By.xpath("//button[@name='SaveEdit']")).click();
 		
