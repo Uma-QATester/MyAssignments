@@ -25,7 +25,9 @@ public class SalesForceLoginAutomation {
 	@BeforeMethod
 	public void preconditions(String url, String userName, String password) {
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("guest");
+		options.addArguments("--disable-notifications");
+		options.addArguments("--user-data-dir=C:\\Users\\MasTER\\Selenium1");
+
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
