@@ -3,6 +3,7 @@ package week5.day1;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
@@ -17,7 +18,7 @@ public class SalesForcetc2 extends SalesForceLoginAutomation {
 		
 		// Enter the Company name as 'TestLeaf'.
 		String company = "TestLeaf";
-		driver.findElement(By.xpath("(//input[@class='slds-input'])[3]")).sendKeys(company);
+		driver.findElement(By.xpath("//input[@name='CompanyName']")).sendKeys(company);
 
 		// Enter Description as 'Salesforces'.
 		String description = "Salesforces";
@@ -34,12 +35,19 @@ public class SalesForcetc2 extends SalesForceLoginAutomation {
 		driver.findElement(By.xpath("//button[@name='SaveEdit']")).click();
 
 		// Verify the Alert message (Complete this field) displayed for Name
-		String errorMsg = driver.findElement(By.xpath("//div[text()='Complete this field.']")).getText();
+		//String errorMsg = driver.findElement(By.xpath("//div[text()='Complete this field.']")).getText();
+		
+		WebElement errorMsg = driver.findElement
+				(By.xpath("//div[contains(@data-name,'Name') and contains(text(),'Complete this field.')]"));
+		
+		String actualError = errorMsg.getText().trim();
+		Assert.assertTrue(actualError.contains("Complete this field."),
+		        "Expected error message not found! Actual message: " + actualError);
+		//As the error msg contains the required msg , the assert returned true so test case passed
+		System.out.println("Actual Error Message is - " + actualError);
+	
+		 	}
 
-		if (errorMsg.equals("Complete this field.")) {
-			System.out.println("Review the Legal Entity Name Field as error msg is =" + errorMsg);
-		}
 
 	}
 
-}
